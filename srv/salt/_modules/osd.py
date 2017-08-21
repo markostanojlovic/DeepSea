@@ -379,11 +379,15 @@ def zero_weight(id, wait=True, **kwargs):
     """
     Set weight to zero and wait until PGs are moved
     """
-    settings = {
+    settings = {}
+    storage_keyring = '/etc/ceph/ceph.client.storage.keyring'
+    if os.path.exists(storage_keyring):
+        settings = {
             'keyring': '/etc/ceph/ceph.client.storage.keyring',
             'client': 'client.storage'
-    }
-    settings.update(kwargs)
+        }
+        settings.update(kwargs)
+
     o = OSDWeight(id, **settings)
     o.save()
     rc, _stdout, _stderr = o.reweight('0.0')
@@ -400,11 +404,15 @@ def restore_weight(id, **kwargs):
     """
     Restore the previous setting for an OSD if possible
     """
-    settings = {
+    settings = {}
+    storage_keyring = '/etc/ceph/ceph.client.storage.keyring'
+    if os.path.exists(storage_keyring):
+        settings = {
             'keyring': '/etc/ceph/ceph.client.storage.keyring',
             'client': 'client.storage'
-    }
-    settings.update(kwargs)
+        }
+        settings.update(kwargs)
+
     o = OSDWeight(id, **settings)
     o.restore()
     return True
@@ -1526,11 +1534,15 @@ class OSDRemove(object):
 def remove(osd_id, **kwargs):
     """
     """
-    settings = {
+    settings = {}
+    storage_keyring = '/etc/ceph/ceph.client.storage.keyring'
+    if os.path.exists(storage_keyring):
+        settings = {
             'keyring': '/etc/ceph/ceph.client.storage.keyring',
             'client': 'client.storage'
-    }
-    settings.update(kwargs)
+        }
+        settings.update(kwargs)
+
     if 'force' in kwargs and kwargs['force']:
         osdw = None
     else:
