@@ -58,7 +58,8 @@ List of recognized parameters and their defaults:
     ssd-spinner=False - Set any of these to True to force the runner to return
                         a certain proposal. Note that this can end up returning
                         an empty proposal
-    ratio=5 - Set the amount of data drives per journal drive
+    ratio=5 - Set the amount of data drives per journal drive (for filestore)
+              wal/db drive (for bluestore)
     db-ration=5 - Set the amount of db drives per wal partition. Only has an
                   effect if format=bluestore and all three device classes are
                   present, i.e. spinners, ssds and nvmes
